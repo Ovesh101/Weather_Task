@@ -39,7 +39,7 @@ const SuggestionList = ({ handleSuggestionClick, type }: SuggestionListProps) =>
   };
 
   return (
-    <div className="relative mt-2 lg:w-[730px] md:w-[600px] sm:w-[500px] w-[400px]">
+    <div className="relative mt-2 lg:w-[730px] md:w-[600px] sm:w-[500px] w-[340px]">
       <div className="absolute top-full left-0 right-0 max-h-[320px] overflow-y-auto bg-white border-gray-300 rounded-lg shadow-lg z-10">
         <ul className="list-none">
           {suggestion.length > 0 ? (

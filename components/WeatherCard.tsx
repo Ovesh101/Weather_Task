@@ -24,7 +24,7 @@ export default function WeatherCard({
     weatherImages[condition.toLowerCase()] || weatherImages.cloudy;
 
   return (
-    <div className="w-[500px] sm:w-[600px] md:w-[700px] lg:w-[900px] min-h-[400px] relative rounded-lg overflow-hidden">
+    <div className="w-[400px] sm:w-[600px] md:w-[700px] lg:w-[900px] min-h-[400px] relative rounded-lg overflow-hidden">
       <Image
         className="absolute inset-0 w-full h-full object-cover"
         src={backgroundImage}
