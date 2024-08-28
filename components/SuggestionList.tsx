@@ -46,7 +46,8 @@ const SuggestionList = ({ handleSuggestionClick, type }: SuggestionListProps) =>
             suggestion.map((weather, index) => (
               <li
                 key={weather.localityId}
-                ref={(el) => (suggestionRefs.current[index] = el)}
+                ref={(el) => { suggestionRefs.current[index] = el; }}
+
                 className={`p-4 cursor-pointer transition-colors duration-300 ${
                   index === activeIndex ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
                 }`}

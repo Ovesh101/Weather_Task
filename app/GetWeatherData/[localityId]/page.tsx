@@ -9,7 +9,7 @@ async function getWeatherData(localityId: string) {
     `https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data?locality_id=${localityId}`,
     {
       headers: {
-        "X-Zomato-Api-Key": API_KEY,
+        "X-Zomato-Api-Key": API_KEY || "",
       },
     }
   ).then((res) => res.json());
@@ -24,9 +24,12 @@ export default async function GetWeatherData({
   const data = await getWeatherData(params.localityId);
   console.log("data weather ", data);
 
-  const { localityName } = Weather_Data.find(
-    (locality) => locality.localityId === params.localityId // or another condition
+  const locality = Weather_Data.find(
+    (locality) => locality.localityId === params.localityId
   );
+  
+  // Non-null assertion to tell TypeScript that localityName will definitely exist
+  const localityName = locality!.localityName;
 
   const {
     temperature,

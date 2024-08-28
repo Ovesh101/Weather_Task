@@ -24,5 +24,5 @@
     windDirection: string;
     rainIntensity: string;
     rainAccumulation: string;
-    localityName: string;
+    localityName?: string;
   }
