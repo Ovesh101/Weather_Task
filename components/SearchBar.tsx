@@ -141,7 +141,7 @@ const SearchBar = ({ type }: { type?: string }) => {
             onFocus={handleFocus}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            className="lg:w-[730px] md:w-[600px] sm:w-[500px] w-[400px] h-[55px] pl-[45px] border border-gray-300 rounded-full drop-shadow-xl focus:outline-none"
+            className="lg:w-[730px] md:w-[600px] sm:w-[500px] w-[350px] h-[55px] pl-[45px] border border-gray-300 rounded-full drop-shadow-xl focus:outline-none"
             placeholder="Search for Locality Names"
             maxLength={70}
           />
