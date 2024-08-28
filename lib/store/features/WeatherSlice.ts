@@ -25,6 +25,10 @@ export const WeatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
+    setType:(state , action:PayloadAction<string>)=>{
+      state.type =  action.payload
+
+    },
     setQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
@@ -55,6 +59,7 @@ export const {
   setError,
   setLoading,
   resetSuggestions,
+  setType
 } = WeatherSlice.actions;
 
 export default WeatherSlice.reducer;

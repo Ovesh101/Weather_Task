@@ -11,20 +11,24 @@ import {
   setError,
   setLoading,
   resetSuggestions,
+  setType,
 } from "@/lib/store/features/WeatherSlice";
 import { weatherStateType } from "@/lib/store/features/WeatherSlice";
 
 import Image from "next/image";
 import SuggestionList from "./SuggestionList";
 
-const SearchBar = ({ type }: { type?: string }) => {
+const SearchBar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const query = useAppSelector((state) => state.weather.query);
+  const type = useAppSelector((state)=>state.weather.type)
   const suggestion = useAppSelector((state: any) => state.weather.suggestion);
   const activeIndex = useAppSelector((state: any) => state.weather.activeIndex);
   const error = useAppSelector((state: any) => state.weather.error);
   const loading = useAppSelector((state: any) => state.weather.loading);
+  
+
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,6 +61,7 @@ const SearchBar = ({ type }: { type?: string }) => {
 
     if (e.key === "ArrowDown") {
       newIndex = (activeIndex + 1) % suggestion.length;
+      
     } else if (e.key === "ArrowUp") {
       newIndex = activeIndex > 0 ? activeIndex - 1 : suggestion.length - 1;
     }
@@ -65,11 +70,13 @@ const SearchBar = ({ type }: { type?: string }) => {
   };
 
   const handleBlur = () => {
-
-    setTimeout(() => dispatch(resetSuggestions()), 200);
+    setTimeout(() => dispatch(setType("remove")), 100);
+   
+    setTimeout(() => dispatch(resetSuggestions()), 100);
   };
 
   const handleFocus = () => {
+    dispatch(setType(""));
     if (query.length > 0) getSuggestion(query);
   };
 
@@ -117,6 +124,7 @@ const SearchBar = ({ type }: { type?: string }) => {
   }, [query]);
 
   const handleCrossIcon = () => {
+    dispatch(setQuery(""))
     dispatch(resetSuggestions());
   };
 

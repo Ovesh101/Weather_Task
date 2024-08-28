@@ -88,7 +88,7 @@ export default async function GetWeatherData({
 
   return (
     <div className="flex flex-col justify-center max-h-screen items-center">
-      <SearchBar type="remove" />
+      <SearchBar  />
 
       <WeatherCard
         condition={condition}
