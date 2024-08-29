@@ -70,7 +70,7 @@ const SearchBar = () => {
   };
 
   const handleBlur = () => {
-    setTimeout(() => dispatch(setType("remove")), 100);
+    setTimeout(() => dispatch(setType("remove")), 200);
    
     setTimeout(() => dispatch(resetSuggestions()), 100);
   };

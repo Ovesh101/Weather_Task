@@ -3,10 +3,11 @@ import WeatherCard from "@/components/WeatherCard";
 import { Weather_Data } from "@/utils/Weather_Data";
 
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API;
+const URL = process.env.NEXT_PUBLIC_WEATHER_URL;
 
 async function getWeatherData(localityId: string) {
   const data = await fetch(
-    `https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data?locality_id=${localityId}`,
+    `${URL}${localityId}`,
     {
       headers: {
         "X-Zomato-Api-Key": API_KEY || "",
