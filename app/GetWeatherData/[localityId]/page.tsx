@@ -7,7 +7,7 @@ const URL = process.env.NEXT_PUBLIC_WEATHER_URL;
 
 async function getWeatherData(localityId: string) {
   const data = await fetch(
-    `${URL}${localityId}`,
+    `https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data?locality_id=${localityId}`,
     {
       headers: {
         "X-Zomato-Api-Key": API_KEY || "",
