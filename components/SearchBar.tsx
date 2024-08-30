@@ -49,21 +49,21 @@ const SearchBar = () => {
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (suggestion.length === 0) return;
-
+  
     let newIndex = activeIndex;
-    let actualIndex = activeIndex; // This is the index in the full list
     const maxVisibleSuggestions = 10;
-
+  
     if (e.key === "ArrowDown") {
-      actualIndex = (activeIndex + 1) % suggestion.length;
-      newIndex = actualIndex % maxVisibleSuggestions;
+      newIndex = (activeIndex + 1) % Math.min(maxVisibleSuggestions, suggestion.length);
+      dispatch(setActiveIndex(newIndex));
     } else if (e.key === "ArrowUp") {
-      actualIndex = (activeIndex - 1 + suggestion.length) % suggestion.length;
-      newIndex = actualIndex % maxVisibleSuggestions;
+      if (activeIndex === 0) {
+        newIndex = Math.min(maxVisibleSuggestions, suggestion.length) - 1;
+      } else {
+        newIndex = (activeIndex - 1 + Math.min(maxVisibleSuggestions, suggestion.length)) % Math.min(maxVisibleSuggestions, suggestion.length);
+      }
+      dispatch(setActiveIndex(newIndex));
     }
-
-    dispatch(setActiveIndex(newIndex));
-    // Optionally, update visible suggestions based on actualIndex
   };
 
   const handleBlur = () => {
@@ -165,7 +165,7 @@ const SearchBar = () => {
         <h1>Loading....</h1>
       ) : (
         <SuggestionList
-          type={type}
+       
           handleSuggestionClick={handleSuggestionClick}
         />
       )}
