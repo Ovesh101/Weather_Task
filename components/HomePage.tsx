@@ -1,6 +1,6 @@
 
 import SearchBar from "../components/SearchBar";
-import Footer from "./Footer";
+
 import Image from "next/image";
 
 export default function HomePage() {
