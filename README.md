@@ -1,7 +1,5 @@
 # Weatherly App 🌤️
 
-![Weatherly Banner](path_to_your_banner_image)
-
 Welcome to the **Weatherly App** - your personalized weather forecasting tool! This project is designed to provide real-time, accurate weather data, focusing on user experience and efficiency.
 
 ## Table of Contents
@@ -14,9 +12,7 @@ Welcome to the **Weatherly App** - your personalized weather forecasting tool! T
 6. [Screenshots](#screenshots)
 7. [Demo Video](#demo-video)
 8. [Code Highlights](#code-highlights)
-9. [Challenges and Learnings](#challenges-and-learnings)
-10. [Future Enhancements](#future-enhancements)
-11. [Contact](#contact)
+
 
 ---
 
@@ -38,8 +34,7 @@ Welcome to the **Weatherly App** - your personalized weather forecasting tool! T
 - **Frontend**: React, TypeScript, Redux (State Management)
 - **Styling**: Tailwind CSS
 - **Routing**: Next.js (for routing and SSR)
-- **Icons**: Lucide React
-- **API**: OpenWeatherMap API (or any other weather API you used)
+- **API**: Weather Union API
 
 ## Setup and Installation
 
@@ -49,7 +44,8 @@ Welcome to the **Weatherly App** - your personalized weather forecasting tool! T
 - npm or yarn
 
 ### Installation Steps
-
-1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/weatherly.git
+   git clone https://github.com/Ovesh101/Weather_Task.git
+   cd Weather_Task
+   npm install
+   npm run dev
