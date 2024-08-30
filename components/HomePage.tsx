@@ -15,15 +15,15 @@ export default function HomePage() {
       <Image
         src="/Images/logo.png" // Replace with the path to your logo
         alt="Google Logo"
-        width={330}
-        height={112}
+        width={400}
+        height={200}
         className=" mb-8"
       />
 
       {/* Search Bar */}
       <SearchBar  />
       </div>
-      <Footer />
+    
     </div>
   );
 }
