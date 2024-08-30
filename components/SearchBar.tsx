@@ -21,14 +21,9 @@ import SuggestionList from "./SuggestionList";
 const SearchBar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const query = useAppSelector((state) => state.weather.query);
-  const type = useAppSelector((state)=>state.weather.type)
-  const suggestion = useAppSelector((state: any) => state.weather.suggestion);
-  const activeIndex = useAppSelector((state: any) => state.weather.activeIndex);
-  const error = useAppSelector((state: any) => state.weather.error);
-  const loading = useAppSelector((state: any) => state.weather.loading);
-  
-
+  const { query, type, suggestion, activeIndex, loading } = useAppSelector(
+    (state) => state.weather
+  );
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,38 +36,41 @@ const SearchBar = () => {
         dispatch(setError("Please enter a valid location"));
       }
     } else if (activeIndex >= 0 && activeIndex < suggestion.length) {
-      dispatch(setQuery(''))
+      dispatch(setQuery(""));
       router.push(`/GetWeatherData/${suggestion[activeIndex].localityId}`);
       dispatch(resetSuggestions());
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
- 
- 
-    
     dispatch(setQuery(e.target.value));
     dispatch(setActiveIndex(-1));
     console.log("Updated input value:", e.target.value);
   };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (suggestion.length === 0) return;
+
     let newIndex = activeIndex;
+    let actualIndex = activeIndex; // This is the index in the full list
+    const maxVisibleSuggestions = 10;
 
     if (e.key === "ArrowDown") {
-      newIndex = (activeIndex + 1) % suggestion.length;
-      
+      actualIndex = (activeIndex + 1) % suggestion.length;
+      newIndex = actualIndex % maxVisibleSuggestions;
     } else if (e.key === "ArrowUp") {
-      newIndex = activeIndex > 0 ? activeIndex - 1 : suggestion.length - 1;
+      actualIndex = (activeIndex - 1 + suggestion.length) % suggestion.length;
+      newIndex = actualIndex % maxVisibleSuggestions;
     }
 
     dispatch(setActiveIndex(newIndex));
+    // Optionally, update visible suggestions based on actualIndex
   };
 
   const handleBlur = () => {
-    setTimeout(() => dispatch(setType("remove")), 200);
-   
-    setTimeout(() => dispatch(resetSuggestions()), 100);
+    setTimeout(() => {
+      dispatch(setType("remove"));
+      dispatch(resetSuggestions());
+    }, 200);
   };
 
   const handleFocus = () => {
@@ -81,12 +79,10 @@ const SearchBar = () => {
   };
 
   const handleSuggestionClick = (index: number) => {
-    console.log("Suggestion clicked");
-    console.log("query before" , query);
 
-    dispatch(setQuery(''))
-    console.log("query after" , query);
-    
+
+    dispatch(setQuery(""));
+  
 
     router.push(`/GetWeatherData/${suggestion[index].localityId}`);
     dispatch(resetSuggestions());
@@ -109,22 +105,16 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    console.log("current query" , query);
-    
-    if (query.length > 0  ) {
+    if (query.length > 0) {
       getSuggestion(query);
     } else {
-      console.log("Resetting suggestions");
-      console.log("suggestion before" , suggestion);
-       // Debugging log
-      dispatch(resetSuggestions())
-      
-      console.log("suggestion after" , suggestion);
+      // Debugging log
+      dispatch(resetSuggestions());
     }
   }, [query]);
 
   const handleCrossIcon = () => {
-    dispatch(setQuery(""))
+    dispatch(setQuery(""));
     dispatch(resetSuggestions());
   };
 
@@ -171,17 +161,14 @@ const SearchBar = () => {
         </div>
       </form>
 
-     
-      
-     
-        {loading ? <h1>Loading....</h1>:( 
+      {loading ? (
+        <h1>Loading....</h1>
+      ) : (
         <SuggestionList
           type={type}
           handleSuggestionClick={handleSuggestionClick}
         />
-        )}
-      
-  
+      )}
     </>
   );
 };

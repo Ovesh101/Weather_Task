@@ -7,6 +7,7 @@ const weatherImages: Record<string, string> = {
   rainy: "/Images/Rainy.webp",
   windy: "/Images/Windy.webp",
   cold: "/Images/Coldy.webp",
+  // By default it is set to cloudy if the data is null...
   cloudy: "/Images/Cloudy.webp",
 };
 
